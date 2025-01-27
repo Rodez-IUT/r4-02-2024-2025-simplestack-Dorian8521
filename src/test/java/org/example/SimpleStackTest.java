@@ -55,19 +55,8 @@ class SimpleStackTest {
         // Given an empty stack
         Stack stack = new SimpleStack();
 
-        //Given an item
-        Item item = new SimpleItem();
-
         // When we "pop" the stack, should throws an EmptyStackException.
-        //assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
-        assertThrows(EmptyStackException.class, stack::pop, "EmptyStackException not thrown");
-
-        //Add item to stack
-        stack.push(item);
-
-        try {
-            assertEquals(item, stack.pop());
-        } catch (EmptyStackException e) {}
+        assertThrows(EmptyStackException.class, () -> stack.pop(), "EmptyStackException not thrown");
     }
 
     @Test
@@ -76,18 +65,35 @@ class SimpleStackTest {
         //Given an empty stack
         Stack stack = new SimpleStack();
 
-        //Given an item
-        Item item = new SimpleItem();
-
         //When we "peek" the stack, should throws an EmptyStackException.
         assertThrows(EmptyStackException.class, () -> stack.peek(), "EmptyStackException not thrown");
+    }
 
-        //Add item to stack
+    @Test
+    @DisplayName("Test when a peek on a non-empty stack")
+    public void testPeekOnNonEmptyStack()  {
+        //Given an empty stack and an item
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
         stack.push(item);
 
-        //when we "peek" the last item in the stack, should return newly created item.
+        //When we "peek" at the last item in the stack, it should return the newly created item.
         try {
-            assertEquals(item, stack.peek());
+            assertEquals(item, stack.peek(), "The item are not return");
+        } catch (EmptyStackException e) {}
+    }
+
+    @Test
+    @DisplayName("Test when a pop on a non-empty stack")
+    public void testPopOnNonEmptyStack()  {
+        //Given an ampty stack and an item
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
+        stack.push(item);
+
+        //When we 'pop' at the last item in the stack, it should return the newly created item.
+        try {
+            assertEquals(item, stack.pop(), "The item are not return");
         } catch (EmptyStackException e) {}
     }
 

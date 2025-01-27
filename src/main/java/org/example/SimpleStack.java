@@ -7,7 +7,8 @@ public class SimpleStack implements Stack {
     private ArrayList<Item> items;
 
     /**
-     * Constructor
+     * Constructor of the SimpleStack class
+     * Initializes the ArrayList containing the different items.
      */
     public SimpleStack() {
         items = new ArrayList<>();
