@@ -1,6 +1,5 @@
 package org.example;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +18,7 @@ class SimpleStackTest {
         // Then… (oracle)
         assertTrue(stack.isEmpty(), "A new stack must be empty");
         assertEquals( 0, stack.getSize(), "A new stack has no element");
+
     }
 
     @Test
@@ -55,8 +55,40 @@ class SimpleStackTest {
         // Given an empty stack
         Stack stack = new SimpleStack();
 
+        //Given an item
+        Item item = new SimpleItem();
+
         // When we "pop" the stack, should throws an EmptyStackException.
         //assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
         assertThrows(EmptyStackException.class, stack::pop, "EmptyStackException not thrown");
+
+        //Add item to stack
+        stack.push(item);
+
+        try {
+            assertEquals(item, stack.pop());
+        } catch (EmptyStackException e) {}
     }
+
+    @Test
+    @DisplayName("Test limit when trying to peek an empty stack")
+    public void testPeekOnEmptyStack()  {
+        //Given an empty stack
+        Stack stack = new SimpleStack();
+
+        //Given an item
+        Item item = new SimpleItem();
+
+        //When we "peek" the stack, should throws an EmptyStackException.
+        assertThrows(EmptyStackException.class, () -> stack.peek(), "EmptyStackException not thrown");
+
+        //Add item to stack
+        stack.push(item);
+
+        //when we "peek" the last item in the stack, should return newly created item.
+        try {
+            assertEquals(item, stack.peek());
+        } catch (EmptyStackException e) {}
+    }
+
 }
